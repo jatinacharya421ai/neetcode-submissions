@@ -1,16 +1,16 @@
-CREATE TABLE stocks (
-  id INTEGER PRIMARY KEY,
-  name TEXT,
-  transaction_dates DATE[]
+CREATE TYPE status AS ENUM ('active', 'inactive', 'pending');
+
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER CHECK (age >= 18),
+    status status
 );
-
 -- Do not modify above this line --
-
-
-INSERT INTO stocks (id, name, transaction_dates) VALUES
-  (1, 'AAPL', ARRAY['2007-02-09', '2007-02-10', '2007-02-11']::DATE[]),
-  (2, 'GOOG', ARRAY['2004-12-15', '2004-12-16']::DATE[]);
-
-
+INSERT INTO users (id, name, age, status) VALUES
+  (1, 'John Doe', 20, 'active'),
+  (2, 'Jane Doe', 27, 'pending'),
+  (3, 'John Smith', 28, 'active'),
+  (4, 'Jane Smith', 30, 'inactive');
 -- Do not modify below this line --
-SELECT * FROM stocks;
+SELECT * FROM users;
